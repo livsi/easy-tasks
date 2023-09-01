@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-
-docker run --rm --interactive --tty --user 1000:1000 --volume $PWD:/app composer/composer $1
