@@ -20,9 +20,6 @@ jobs:
         with:
           working_dir: /app/numbersLadder
 
-      - name: Install Task
-        uses: arduino/setup-task@v1
-
       - name: Check code-style
         run: |
           numbersLadder/vendor/bin/php-cs-fixer fix --dry-run
