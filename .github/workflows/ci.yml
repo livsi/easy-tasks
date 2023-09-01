@@ -1,6 +1,9 @@
-name: numbersLadder_CI
+name: ci
 
 on: [ push ]
+
+permissions:
+  contents: read
 
 jobs:
   build:
@@ -9,14 +12,20 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Cache dependencies
+      - name: Validate composer.json and composer.lock
+        run: composer validate --strict
+
+      - name: Cache Composer packages
+        id: composer-cache
         uses: actions/cache@v3
         with:
           path: vendor
-          key: ${{ github.sha }}
+          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-php-
 
       - name: Install dependencies
-        uses: php-actions/composer@v6
+        run: composer install --prefer-dist --no-progress
 
       - name: Check code-style
         run: |
