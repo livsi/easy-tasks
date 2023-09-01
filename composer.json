@@ -11,12 +11,14 @@
     },
     "autoload": {
         "psr-4": {
-            "App\\": "numbersLadder/src"
+            "App\\": "numbersLadder/src",
+            "Matrix\\": "matrixWithRandomNumbers/src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "App\\Test\\": "numbersLadder/tests"
+            "App\\Test\\": "numbersLadder/tests",
+            "Matrix\\Test\\": "matrixWithRandomNumbers/tests"
         }
     }
 }
