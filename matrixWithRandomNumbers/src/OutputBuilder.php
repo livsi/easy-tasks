@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Matrix;
 
-readonly class OutputBuilder
+class OutputBuilder
 {
-    public function __construct(private RandomUniqueIntGeneratorInterface $uniqueRand)
+    public function __construct(readonly private RandomUniqueIntGeneratorInterface $uniqueRand)
     {
     }
 
