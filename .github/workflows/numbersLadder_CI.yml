@@ -9,10 +9,10 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Cache Composer dependencies
+      - name: Cache dependencies
         uses: actions/cache@v3
         with:
-          path: /vendor
+          path: vendor
           key: ${{ github.sha }}
 
       - name: Install dependencies
