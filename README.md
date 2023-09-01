@@ -9,7 +9,7 @@
 - паттерны
 
 ## Решенные задачи
-- [](./numbersLadder/README.md)
+- [Лестница чисел](./numbersLadder/README.md)
 
 ## Как развернуть это у себя
 
