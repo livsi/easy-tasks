@@ -16,5 +16,5 @@ tasks:
     silent: true
   test:
     cmds:
-      - bin/php vendor/bin/phpunit
+      - bin/php vendor/bin/phpunit {{.CLI_ARGS}}
     silent: true
