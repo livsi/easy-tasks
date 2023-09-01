@@ -6,7 +6,15 @@ vars:
   GREETING: Hello, World!
 
 tasks:
+  init:
+    cmds:
+      - bin/composer install
+    silent: true
   cs-fix:
     cmds:
-      - bin/php numbersLadder/vendor/bin/php-cs-fixer fix {{.CLI_ARGS}}
+      - bin/php vendor/bin/php-cs-fixer fix {{.CLI_ARGS}}
+    silent: true
+  test:
+    cmds:
+      - bin/php vendor/bin/phpunit
     silent: true

@@ -11,10 +11,10 @@
          failOnWarning="true">
 
     <testsuites>
-        <testsuite name="Unit">
+        <testsuite name="numbersLadderUnit">
             <directory>tests/Unit</directory>
         </testsuite>
-        <testsuite name="Acceptance">
+        <testsuite name="numbersLadderAcceptance">
             <directory>tests/Acceptance</directory>
         </testsuite>
     </testsuites>

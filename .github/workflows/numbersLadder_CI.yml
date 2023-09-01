@@ -17,18 +17,16 @@ jobs:
 
       - name: Install dependencies
         uses: php-actions/composer@v6
-        with:
-          working_dir: /app/numbersLadder
 
       - name: Check code-style
         run: |
-          numbersLadder/vendor/bin/php-cs-fixer fix --dry-run
+          vendor/bin/php-cs-fixer fix --dry-run
 
       - name: PHPUnit Tests
         uses: php-actions/phpunit@master
         env:
           TEST_NAME: numbersLadder
         with:
-          bootstrap: numbersLadder/vendor/autoload.php
+          bootstrap: vendor/autoload.php
           configuration: numbersLadder/phpunit.xml
           working-directory: ./app/numbersLadder
