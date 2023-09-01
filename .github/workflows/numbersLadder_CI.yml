@@ -15,8 +15,8 @@ jobs:
           path: /tmp/composer-cache
           key: ${{ runner.os }}-${{ hashFiles('**/composer.lock') }}
 
+      - uses: php-actions/composer@v6
       - name: Install dependencies
-        uses: php-actions/composer@v6
         working-directory: ./app/numbersLadder
         run: composer install
 
