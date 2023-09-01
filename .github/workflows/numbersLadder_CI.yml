@@ -18,7 +18,7 @@ jobs:
       - name: Install dependencies
         uses: php-actions/composer@v6
         with:
-          container_workdir: /app/numbersLadder
+          working_dir: /app/numbersLadder
 
       - name: PHPUnit Tests
         uses: php-actions/phpunit@master
