@@ -6,5 +6,5 @@ namespace Matrix;
 
 interface RandomUniqueIntGeneratorInterface
 {
-    public function getNumber(): iterable;
+    public function getNumber(int $itemsCount): iterable;
 }

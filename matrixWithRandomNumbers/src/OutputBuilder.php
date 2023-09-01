@@ -4,41 +4,50 @@ declare(strict_types=1);
 
 namespace Matrix;
 
-class OutputBuilder
+readonly class OutputBuilder
 {
-    public function __construct(readonly private RandomUniqueIntGeneratorInterface $uniqueRand)
-    {
+    public function __construct(
+        private RandomUniqueIntGeneratorInterface $uniqueRand,
+        private int $columnsCount,
+        private int $rowsCount,
+        private int $innerWidth
+    ) {
     }
 
     /**
      * @throws \Exception
      */
-    public function getResult(int $columnsCount, int $rowsCount, int $innerWidth): string
+    public function getResult(): string
     {
         $currColumn = 0;
         $currRow = 0;
         $result = '';
-        $generator = $this->uniqueRand->getNumber($columnsCount * $rowsCount);
+        $generator = $this->uniqueRand->getNumber($this->columnsCount * $this->rowsCount);
         foreach ($generator as $number) {
-            if (($currColumn % $columnsCount) === 0) {
+            if (($currColumn % $this->columnsCount) === 0) {
                 ++$currRow;
-                if ($currRow > $rowsCount) {
+                if ($currRow > $this->rowsCount) {
                     break;
                 }
-                $result .= $this->rowDelimiter($columnsCount, $innerWidth, 0 === $currColumn);
+                $result .= $this->rowDelimiter($this->columnsCount, 0 === $currColumn);
             }
-            $result .= str_pad('| '.$number, $innerWidth + 3);
+            $result .= $this->formatCell($number, $this->innerWidth);
 
             ++$currColumn;
         }
 
-        $result .= $this->rowDelimiter($columnsCount, $innerWidth);
+        $result .= $this->rowDelimiter($this->columnsCount);
 
         return $result;
     }
 
-    public function rowDelimiter(int $width, int $innerWidth, bool $isFirstLine = false): string
+    private function rowDelimiter(int $width, bool $isFirstLine = false): string
     {
-        return ($isFirstLine ? '' : "|\n").str_pad('', $width * ($innerWidth + 3) + 1, '-')."\n";
+        return ($isFirstLine ? '' : "|\n").str_pad('', $width * ($this->innerWidth + 3) + 1, '-')."\n";
+    }
+
+    private function formatCell($number): string
+    {
+        return str_pad('| '.$number, $this->innerWidth + 3);
     }
 }

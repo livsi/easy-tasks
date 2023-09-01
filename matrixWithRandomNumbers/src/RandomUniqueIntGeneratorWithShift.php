@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Matrix;
 
+use Random\RandomException;
+
 class RandomUniqueIntGeneratorWithShift implements RandomUniqueIntGeneratorInterface
 {
     private array $alreadyUsedNumbers = [];
@@ -18,10 +20,15 @@ class RandomUniqueIntGeneratorWithShift implements RandomUniqueIntGeneratorInter
     }
 
     /**
-     * @throws \Exception
+     * @throws OutputLogicException
+     * @throws RandomException
+     * @throws \ValueError
      */
-    public function getNumber(): iterable
+    public function getNumber(int $itemsCount): iterable
     {
+        if ($this->itemsCount < $itemsCount) {
+            throw new OutputLogicException();
+        }
         for ($i = 0; $i < $this->itemsCount; ++$i) {
             $current = random_int($this->start, $this->end);
             if (in_array($current, $this->alreadyUsedNumbers, true)) {
