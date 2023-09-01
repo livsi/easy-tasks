@@ -22,10 +22,18 @@ jobs:
         run: |
           vendor/bin/php-cs-fixer fix --dry-run
 
-      - name: PHPUnit Tests
+      - name: PHPUnit Tests numbersLadder
         uses: php-actions/phpunit@master
         env:
           TEST_NAME: numbersLadder
         with:
           bootstrap: vendor/autoload.php
           configuration: numbersLadder/phpunit.xml
+
+      - name: PHPUnit Tests matrixWithRandomNumbers
+        uses: php-actions/phpunit@master
+        env:
+          TEST_NAME: matrixWithRandomNumbers
+        with:
+          bootstrap: vendor/autoload.php
+          configuration: matrixWithRandomNumbers/phpunit.xml
