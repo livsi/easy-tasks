@@ -29,4 +29,3 @@ jobs:
         with:
           bootstrap: vendor/autoload.php
           configuration: numbersLadder/phpunit.xml
-          working-directory: ./app/numbersLadder
