@@ -1,6 +1,6 @@
 name: numbersLadder_CI
 
-on: [push]
+on: [ push ]
 
 jobs:
   build-test:
@@ -19,6 +19,12 @@ jobs:
         uses: php-actions/composer@v6
         with:
           working_dir: /app/numbersLadder
+
+      - name: Install Task
+        uses: arduino/setup-task@v1
+
+      - name: Check code-style
+        run: task cs-fix-check
 
       - name: PHPUnit Tests
         uses: php-actions/phpunit@master
