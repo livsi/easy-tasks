@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Matrix\Test\Unit;
+namespace Matrix\Test\Acceptance;
 
 use Matrix\OutputBuilder;
 use Matrix\RandomUniqueIntGeneratorInterface;
