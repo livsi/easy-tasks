@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Matrix;
 
-readonly class OutputBuilder
+final class OutputBuilder
 {
     public function __construct(
-        private RandomUniqueIntGeneratorInterface $uniqueRand,
-        private int $columnsCount,
-        private int $rowsCount,
-        private int $innerWidth
+        readonly private RandomUniqueIntGeneratorInterface $uniqueRand,
+        readonly private int $columnsCount,
+        readonly private int $rowsCount,
+        readonly private int $innerWidth
     ) {
     }
 
