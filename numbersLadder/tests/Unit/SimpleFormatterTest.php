@@ -12,21 +12,19 @@ use PHPUnit\Framework\TestCase;
 #[CoversClass(SimpleFormatter::class)]
 class SimpleFormatterTest extends TestCase
 {
-    public static function cases():iterable
+    public static function cases(): iterable
     {
-        yield 'empty'=>[[], "\n"];
-        yield '1 element'=>[[3], "3\n"];
-        yield '3 element'=>[[1, 2, 3], "1 2 3\n"];
-        yield 'string element'=>[['foo', 'bar'], "foo bar\n"];
+        yield 'empty' => [[], "\n"];
+        yield '1 element' => [[3], "3\n"];
+        yield '3 element' => [[1, 2, 3], "1 2 3\n"];
+        yield 'string element' => [['foo', 'bar'], "foo bar\n"];
     }
 
     #[DataProvider('cases')]
-    public function testFormat(array $input, string $expected)
+    public function testFormat(array $input, string $expected): void
     {
         $formatter = (new SimpleFormatter())();
 
         self::assertEquals($expected, $formatter($input));
     }
-
-
 }

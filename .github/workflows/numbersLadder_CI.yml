@@ -1,6 +1,6 @@
 name: numbersLadder_CI
 
-on: [push]
+on: [ push ]
 
 jobs:
   build-test:
@@ -19,6 +19,10 @@ jobs:
         uses: php-actions/composer@v6
         with:
           working_dir: /app/numbersLadder
+
+      - name: Check code-style
+        run: |
+          numbersLadder/vendor/bin/php-cs-fixer fix --dry-run
 
       - name: PHPUnit Tests
         uses: php-actions/phpunit@master
