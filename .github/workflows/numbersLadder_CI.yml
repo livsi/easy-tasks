@@ -24,7 +24,8 @@ jobs:
         uses: arduino/setup-task@v1
 
       - name: Check code-style
-        run: task cs-fix-check
+        run: |
+          task cs-fix-check
 
       - name: PHPUnit Tests
         uses: php-actions/phpunit@master

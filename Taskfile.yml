@@ -13,5 +13,6 @@ tasks:
 
   cs-fix-check:
     cmds:
-      - bin/php numbersLadder/vendor/bin/php-cs-fixer fix --dry-run {{.CLI_ARGS}}
+      - |
+        bin/php numbersLadder/vendor/bin/php-cs-fixer fix --dry-run {{.CLI_ARGS}}
     silent: true
