@@ -16,7 +16,7 @@ final class Loto implements RandomUniqueIntGenerator
     public function __construct(readonly private int $start, readonly private int $end)
     {
         $this->loto = range($this->start, $this->end);
-        $this->itemsCount = $this->end - $this->start +1;
+        $this->itemsCount = $this->end - $this->start + 1;
     }
 
     /**
