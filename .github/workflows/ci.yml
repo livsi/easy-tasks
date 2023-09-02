@@ -6,7 +6,7 @@ permissions:
   contents: read
 
 jobs:
-  lint:
+  ci:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -24,9 +24,8 @@ jobs:
         run: composer install --prefer-dist --no-progress
 
       - name: Check code-style
-        run: |
-          vendor/bin/php-cs-fixer fix --dry-run
-      - name: PHPUnit Tests numbersLadder
+        run: vendor/bin/php-cs-fixer fix --dry-run
+      - name: PHPUnit Tests
         uses: php-actions/phpunit@master
         env:
           TEST_NAME: all
