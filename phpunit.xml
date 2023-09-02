@@ -26,4 +26,9 @@
             <directory>matrixWithRandomNumbers/src</directory>
         </include>
     </source>
+    <coverage includeUncoveredFiles="true"
+              pathCoverage="true"
+              ignoreDeprecatedCodeUnits="true"
+              disableCodeCoverageIgnore="true">
+    </coverage>
 </phpunit>

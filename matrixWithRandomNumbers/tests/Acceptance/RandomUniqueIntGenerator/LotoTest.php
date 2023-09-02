@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace Matrix\Test\Acceptance\RandomUniqueIntGenerator;
 
-use Matrix\RandomUniqueIntegerGeneratorLogicException;
 use Matrix\RandomUniqueIntGenerator\Loto;
 use PHPUnit\Framework\Attributes\CoversClass;
-use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\DataProviderExternal;
 use PHPUnit\Framework\TestCase;
 
 use function PHPUnit\Framework\assertGreaterThanOrEqual;
@@ -27,17 +26,11 @@ final class LotoTest extends TestCase
         }
     }
 
-    #[DataProvider('invalidProperties')]
-    public function testExceptionalOnCreateLoto($min, $max, $expectExc): void
+    #[DataProviderExternal(GeneratorInitializeDataProvider::class, 'invalidProperties')]
+    #[DataProviderExternal(GeneratorInitializeDataProvider::class, 'outRange')]
+    public function testExceptionalOnCreate($min, $max, $expectExc): void
     {
         $this->expectException($expectExc);
         new Loto($min, $max);
-    }
-
-    public static function invalidProperties(): iterable
-    {
-        yield 'max < min' => [0, -1, RandomUniqueIntegerGeneratorLogicException::class];
-        yield 'out of range int' => [0, PHP_INT_MAX + 1, \TypeError::class];
-        yield 'max range int' => [0, 1073741823, RandomUniqueIntegerGeneratorLogicException::class];
     }
 }

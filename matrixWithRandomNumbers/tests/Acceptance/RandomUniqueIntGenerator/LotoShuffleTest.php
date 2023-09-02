@@ -6,6 +6,7 @@ namespace Matrix\Test\Acceptance\RandomUniqueIntGenerator;
 
 use Matrix\RandomUniqueIntGenerator\LotoShuffle;
 use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProviderExternal;
 use PHPUnit\Framework\TestCase;
 
 use function PHPUnit\Framework\assertGreaterThanOrEqual;
@@ -23,5 +24,13 @@ class LotoShuffleTest extends TestCase
             assertGreaterThanOrEqual($start, $number);
             assertLessThanOrEqual($end, $number);
         }
+    }
+
+    #[DataProviderExternal(GeneratorInitializeDataProvider::class, 'invalidProperties')]
+    #[DataProviderExternal(GeneratorInitializeDataProvider::class, 'outRange')]
+    public function testExceptionalOnCreate($min, $max, $expectExc): void
+    {
+        $this->expectException($expectExc);
+        new LotoShuffle($min, $max);
     }
 }
