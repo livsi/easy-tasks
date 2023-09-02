@@ -12,6 +12,7 @@
 ## Решенные задачи
 - [Лестница чисел](./numbersLadder/README.md)
 - [Матрица уникальных случайных чисел](./matrixWithRandomNumbers/README.md)
+- [Телефон на странице контактов](./phoneNumberOnContact/README.md)
 
 ## Как развернуть это у себя
 
