@@ -7,7 +7,7 @@ namespace Matrix;
 final class OutputBuilder
 {
     public function __construct(
-        readonly private RandomUniqueIntGeneratorInterface $uniqueRand,
+        readonly private RandomUniqueIntGenerator $uniqueRand,
         readonly private int $columnsCount,
         readonly private int $rowsCount,
         readonly private int $innerWidth

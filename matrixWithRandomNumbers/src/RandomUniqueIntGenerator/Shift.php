@@ -6,7 +6,7 @@ namespace Matrix;
 
 use Random\RandomException;
 
-class RandomUniqueIntGeneratorWithShift implements RandomUniqueIntGeneratorInterface
+final class Shift implements RandomUniqueIntGenerator
 {
     private array $alreadyUsedNumbers = [];
 
@@ -16,7 +16,7 @@ class RandomUniqueIntGeneratorWithShift implements RandomUniqueIntGeneratorInter
 
     public function __construct(readonly private int $start, readonly private int $end)
     {
-        $this->itemsCount = count(range($this->start, $this->end));
+        $this->itemsCount = $this->end - $this->start +1;
     }
 
     /**

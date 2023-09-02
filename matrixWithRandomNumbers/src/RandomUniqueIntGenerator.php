@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Matrix;
 
-interface RandomUniqueIntGeneratorInterface
+interface RandomUniqueIntGenerator
 {
     public function getNumber(int $itemsCount): iterable;
 }
