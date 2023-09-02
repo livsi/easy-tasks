@@ -4,7 +4,7 @@
 declare(strict_types=1);
 
 use Matrix\OutputBuilder;
-use Matrix\RandomUniqueIntGenerator\Loto;
+use Matrix\RandomUniqueIntGenerator\LotoShuffle;
 
 require __DIR__.'/../vendor/autoload.php';
 
@@ -27,7 +27,7 @@ $innerWidth = (int) $argv[5] ?: 4;
 
 try {
     echo (new OutputBuilder(
-        uniqueRand: new Loto($start, $end),
+        uniqueRand: new LotoShuffle($start, $end),
         columnsCount: $columns,
         rowsCount: $rows,
         innerWidth: $innerWidth)
