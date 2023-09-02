@@ -8,20 +8,22 @@
          beStrictAboutCoverageMetadata="true"
          beStrictAboutOutputDuringTests="true"
          failOnRisky="true"
-         failOnWarning="true">
+         failOnWarning="true"
+         testdox="true">
 
     <testsuites>
-        <testsuite name="Unit">
-            <directory>tests/Unit</directory>
+        <testsuite name="numbersLadderUnit">
+            <directory>numbersLadder/tests</directory>
         </testsuite>
-        <testsuite name="Acceptance">
-            <directory>tests/Acceptance</directory>
+        <testsuite name="matrixWithRandomNumbers">
+            <directory>matrixWithRandomNumbers/tests</directory>
         </testsuite>
     </testsuites>
 
     <source restrictDeprecations="true" restrictNotices="true" restrictWarnings="true">
         <include>
-            <directory>src</directory>
+            <directory>numbersLadder/src</directory>
+            <directory>matrixWithRandomNumbers/src</directory>
         </include>
     </source>
 </phpunit>

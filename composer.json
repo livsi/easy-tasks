@@ -1,5 +1,6 @@
 {
-    "name": "easy-tasks/numbers-ladder",
+    "name": "livsi/easy-tasks",
+    "description": "Some easy brainteasers",
     "license": "MIT",
     "require": {
         "php": ">=8.1",
@@ -11,12 +12,14 @@
     },
     "autoload": {
         "psr-4": {
-            "App\\": "src"
+            "App\\": "numbersLadder/src",
+            "Matrix\\": "matrixWithRandomNumbers/src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "App\\Test\\": "tests"
+            "App\\Test\\": "numbersLadder/tests",
+            "Matrix\\Test\\": "matrixWithRandomNumbers/tests"
         }
     }
 }

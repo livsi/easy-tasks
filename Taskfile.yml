@@ -6,7 +6,15 @@ vars:
   GREETING: Hello, World!
 
 tasks:
+  init:
+    cmds:
+      - bin/composer install
+    silent: true
   cs-fix:
     cmds:
-      - bin/php numbersLadder/vendor/bin/php-cs-fixer fix {{.CLI_ARGS}}
+      - docker run --rm --tty --user 1000:1000 --volume $PWD:/app -w /app php:8.2.8-cli-alpine3.18 php vendor/bin/php-cs-fixer fix {{.CLI_ARGS}}
+    silent: true
+  test:
+    cmds:
+      - docker run --rm --tty --user 1000:1000 --volume $PWD:/app -w /app php:8.2.8-cli-alpine3.18 php vendor/bin/phpunit --testdox  -c ./phpunit.xml {{.CLI_ARGS}}
     silent: true
