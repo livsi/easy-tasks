@@ -4,31 +4,37 @@ declare(strict_types=1);
 
 namespace Matrix\RandomUniqueIntGenerator;
 
-use Matrix\OutputLogicException;
+use Matrix\RandomUniqueIntegerGeneratorLogicException;
 use Matrix\RandomUniqueIntGenerator;
-use Random\RandomException;
 
 final class Loto implements RandomUniqueIntGenerator
 {
+    private const MAX_ARRAY_ITEMS = 1073741822;
     private array $loto;
     private int $itemsCount;
 
-    public function __construct(readonly private int $start, readonly private int $end)
-    {
-        $this->loto = range($this->start, $this->end);
-        $this->itemsCount = $this->end - $this->start + 1;
+    /**
+     * @throws RandomUniqueIntegerGeneratorLogicException
+     */
+    public function __construct(
+        readonly private int $min,
+        readonly private int $max
+    ) {
+        $this->itemsCount = $this->max - $this->min + 1;
+        if ($this->itemsCount < 1) {
+            throw new RandomUniqueIntegerGeneratorLogicException('max can be more than min, an ValueError will be thrown in range func.');
+        }
+        if ($this->itemsCount > self::MAX_ARRAY_ITEMS) {
+            throw new RandomUniqueIntegerGeneratorLogicException('max count of array items'.self::MAX_ARRAY_ITEMS.', an ValueError will be thrown in range func');
+        }
+        $this->loto = range($this->min, $this->max);
     }
 
     /**
-     * @throws OutputLogicException
-     * @throws RandomException
-     * @throws \ValueError
+     * @throws \Exception
      */
-    public function getNumber(int $itemsCount): iterable
+    public function getNumber(): iterable
     {
-        if ($this->itemsCount < $itemsCount) {
-            throw new OutputLogicException();
-        }
         for ($i = 0; $i < $this->itemsCount; ++$i) {
             $current = random_int(0, count($this->loto) - 1);
 

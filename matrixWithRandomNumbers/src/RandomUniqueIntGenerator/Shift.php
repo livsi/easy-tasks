@@ -2,9 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Matrix;
+namespace Matrix\RandomUniqueIntGenerator;
 
-use Random\RandomException;
+use Matrix\RandomUniqueIntegerGeneratorLogicException;
+use Matrix\RandomUniqueIntGenerator;
 
 final class Shift implements RandomUniqueIntGenerator
 {
@@ -14,21 +15,23 @@ final class Shift implements RandomUniqueIntGenerator
 
     private readonly int $itemsCount;
 
+    /**
+     * @throws RandomUniqueIntegerGeneratorLogicException
+     */
     public function __construct(readonly private int $start, readonly private int $end)
     {
         $this->itemsCount = $this->end - $this->start + 1;
+        if ($this->itemsCount < 0) {
+            throw new RandomUniqueIntegerGeneratorLogicException('max can be more than min, an ValueError will be thrown.');
+        }
     }
 
     /**
-     * @throws OutputLogicException
-     * @throws RandomException
+     * @throws RandomUniqueIntegerGeneratorLogicException
      * @throws \ValueError
      */
-    public function getNumber(int $itemsCount): iterable
+    public function getNumber(): iterable
     {
-        if ($this->itemsCount < $itemsCount) {
-            throw new OutputLogicException();
-        }
         for ($i = 0; $i < $this->itemsCount; ++$i) {
             $current = random_int($this->start, $this->end);
             if (in_array($current, $this->alreadyUsedNumbers, true)) {

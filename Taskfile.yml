@@ -12,9 +12,9 @@ tasks:
     silent: true
   cs-fix:
     cmds:
-      - bin/php vendor/bin/php-cs-fixer fix {{.CLI_ARGS}}
+      - docker run --rm --tty --user 1000:1000 --volume $PWD:/app -w /app php:8.2.8-cli-alpine3.18 php vendor/bin/php-cs-fixer fix {{.CLI_ARGS}}
     silent: true
   test:
     cmds:
-      - bin/php vendor/bin/phpunit {{.CLI_ARGS}}
+      - docker run --rm --tty --user 1000:1000 --volume $PWD:/app -w /app php:8.2.8-cli-alpine3.18 php vendor/bin/phpunit --testdox  -c ./phpunit.xml {{.CLI_ARGS}}
     silent: true

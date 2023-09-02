@@ -22,7 +22,7 @@ final class OutputBuilder
         $currColumn = 0;
         $currRow = 0;
         $result = '';
-        $generator = $this->uniqueRand->getNumber($this->columnsCount * $this->rowsCount);
+        $generator = $this->uniqueRand->getNumber();
         foreach ($generator as $number) {
             if (($currColumn % $this->columnsCount) === 0) {
                 ++$currRow;
