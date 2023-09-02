@@ -12,7 +12,6 @@ class GeneratorInitializeDataProvider
     {
         yield 'max < min' => [0, -1, RandomUniqueIntegerGeneratorLogicException::class];
         yield 'out of range int' => [0, PHP_INT_MAX + 1, \TypeError::class];
-
     }
 
     public static function outRange(): iterable
