@@ -63,7 +63,7 @@ jobs:
         with:
           path: |
             ~/vendor
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/composer.lock') }}
+          key: ${{ runner.os }}-build-${{ hashFiles('**/composer.lock') }}
       - name: "Check code-style"
         run: vendor/bin/php-cs-fixer fix --dry-run
   test:
@@ -89,7 +89,7 @@ jobs:
         with:
           path: |
             ~/vendor
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/composer.lock') }}
+          key: ${{ runner.os }}-build-${{ hashFiles('**/composer.lock') }}
       - name: "Install dependencies"
         run: composer install --prefer-dist --no-progress
 
