@@ -53,6 +53,11 @@ jobs:
           tools: composer:v2
       - name: "Install dependencies"
         run: composer install --prefer-dist --no-progress
+      - name: "Cache dependencies"
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/vendor
       - name: "Check code-style"
         run: vendor/bin/php-cs-fixer fix --dry-run
   test:
@@ -73,7 +78,11 @@ jobs:
           coverage: "true"
           php-version: '8.2'
           tools: composer:v2
-
+      - name: "Cache dependencies"
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/vendor
       - name: "Install dependencies"
         run: composer install --prefer-dist --no-progress
 
