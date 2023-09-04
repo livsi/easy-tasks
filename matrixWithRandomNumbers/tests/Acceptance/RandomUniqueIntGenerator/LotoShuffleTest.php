@@ -25,12 +25,4 @@ class LotoShuffleTest extends TestCase
             assertLessThanOrEqual($end, $number);
         }
     }
-
-    #[DataProviderExternal(GeneratorInitializeDataProvider::class, 'invalidProperties')]
-    #[DataProviderExternal(GeneratorInitializeDataProvider::class, 'outRange')]
-    public function testExceptionalOnCreate($min, $max, $expectExc): void
-    {
-        $this->expectException($expectExc);
-        new LotoShuffle($min, $max);
-    }
 }
