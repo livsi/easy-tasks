@@ -46,7 +46,7 @@ jobs:
       - name: "Setup PHP"
         uses: shivammathur/setup-php@v2
         with:
-          coverage: "true"
+          coverage: "false"
           php-version: "${{ matrix.php-version }}"
           tools: composer:v2
 #      - name: "Cache dependencies"
