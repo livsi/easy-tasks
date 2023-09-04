@@ -61,11 +61,9 @@ jobs:
       - name: "Cache dependencies"
         uses: actions/cache@v3
         with:
-          path: |
-            vendor
-          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
-          restore-keys: |
-            ${{ runner.OS }}-composer-
+          path: vendor
+          key: "php-${{ matrix.php-version }}-composer-${{ hashFiles('composer.lock') }}"
+          restore-keys: "php-${{ matrix.php-version }}-composer-"
       - name: "Check code-style"
         run: vendor/bin/php-cs-fixer fix --dry-run
   test:
@@ -89,11 +87,9 @@ jobs:
       - name: "Cache dependencies"
         uses: actions/cache@v3
         with:
-          path: |
-            vendor
-          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
-          restore-keys: |
-            ${{ runner.OS }}-composer-
+          path: vendor
+          key: "php-${{ matrix.php-version }}-composer-${{ hashFiles('composer.lock') }}"
+          restore-keys: "php-${{ matrix.php-version }}-composer-"
       - name: "Install dependencies"
         run: composer install --prefer-dist --no-progress
 
