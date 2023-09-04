@@ -56,8 +56,8 @@ jobs:
       - name: "Cache dependencies"
         uses: actions/cache@v3
         with:
-          path: |
-            ~/vendor
+          path: ~/vendor
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/composer.lock') }}
       - name: "Check code-style"
         run: vendor/bin/php-cs-fixer fix --dry-run
   test:
