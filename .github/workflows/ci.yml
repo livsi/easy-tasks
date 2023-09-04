@@ -58,6 +58,8 @@ jobs:
             ~/vendor
       - name: "Install dependencies"
         run: composer install --prefer-dist --no-progress
+      - name: "Key value"
+        run: echo "php-${{ matrix.php-version }}-composer-${{ hashFiles('composer.lock') }}"
       - name: "Cache dependencies"
         uses: actions/cache@v3
         with:
