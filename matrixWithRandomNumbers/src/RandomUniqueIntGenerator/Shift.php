@@ -30,7 +30,7 @@ final class Shift implements RandomUniqueIntGenerator
     public function getNumber(): iterable
     {
         for ($i = 0; $i < $this->itemsCount; ++$i) {
-            $current = rand($this->min, $this->max);
+            $current = random_int($this->min, $this->max);
             if (in_array($current, $this->alreadyUsedNumbers, true)) {
                 $current = $this->shiftToNext($current);
             } else {

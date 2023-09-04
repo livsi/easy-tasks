@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Matrix\Test\Benchmark;
 
-use Matrix\OutputBuilder;
 use Matrix\RandomUniqueIntGenerator\GeneratorType;
 use Matrix\RandomUniqueIntGenerator\RandomUniqueIntGeneratorFactory;
 use PhpBench\Attributes as Bench;
@@ -12,8 +11,7 @@ use PhpBench\Attributes as Bench;
 class RandomUniqueIntGeneratorCompareBench
 {
     private const REV = 999;
-    private const ITER=100;
-
+    private const ITER = 100;
 
     #[Bench\Revs(self::REV)]
     #[Bench\Iterations(self::ITER)]
@@ -23,8 +21,6 @@ class RandomUniqueIntGeneratorCompareBench
         $this->run(GeneratorType::LOTO);
     }
 
-
-
     #[Bench\Revs(self::REV)]
     #[Bench\Iterations(self::ITER)]
     #[Bench\RetryThreshold(20.0)]
@@ -32,6 +28,7 @@ class RandomUniqueIntGeneratorCompareBench
     {
         $this->run(GeneratorType::LOTO_SHUFFLE);
     }
+
     #[Bench\Revs(self::REV)]
     #[Bench\Iterations(self::ITER)]
     #[Bench\RetryThreshold(20.0)]
@@ -39,6 +36,7 @@ class RandomUniqueIntGeneratorCompareBench
     {
         $this->run(GeneratorType::SHIFT);
     }
+
     private function run(GeneratorType $type): void
     {
         (new RandomUniqueIntGeneratorFactory())->create(GeneratorType::LOTO, 1, 10000)->getNumber();
