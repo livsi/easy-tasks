@@ -51,12 +51,18 @@ jobs:
           coverage: "true"
           php-version: "${{ matrix.php-version }}"
           tools: composer:v2
+      - name: "Cache dependencies"
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/vendor
       - name: "Install dependencies"
         run: composer install --prefer-dist --no-progress
       - name: "Cache dependencies"
         uses: actions/cache@v3
         with:
-          path: ~/vendor
+          path: |
+            ~/vendor
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/composer.lock') }}
       - name: "Check code-style"
         run: vendor/bin/php-cs-fixer fix --dry-run
@@ -83,6 +89,7 @@ jobs:
         with:
           path: |
             ~/vendor
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/composer.lock') }}
       - name: "Install dependencies"
         run: composer install --prefer-dist --no-progress
 
