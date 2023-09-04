@@ -6,7 +6,6 @@ namespace Matrix\Test\Acceptance\RandomUniqueIntGenerator;
 
 use Matrix\RandomUniqueIntGenerator\LotoShuffle;
 use PHPUnit\Framework\Attributes\CoversClass;
-use PHPUnit\Framework\Attributes\DataProviderExternal;
 use PHPUnit\Framework\TestCase;
 
 use function PHPUnit\Framework\assertGreaterThanOrEqual;
