@@ -16,14 +16,11 @@ final class Shift implements RandomUniqueIntGenerator
     private readonly int $itemsCount;
 
     /**
-     * @throws RandomUniqueIntegerGeneratorLogicException
+     * @internal
      */
-    public function __construct(readonly private int $max, readonly private int $min)
+    public function __construct(readonly private int $min, readonly private int $max)
     {
-        $this->itemsCount = $this->min - $this->max + 1;
-        if ($this->itemsCount < 1) {
-            throw new RandomUniqueIntegerGeneratorLogicException('max can be more than min, an ValueError will be thrown.');
-        }
+        $this->itemsCount = $this->max - $this->min + 1;
     }
 
     /**
@@ -33,7 +30,7 @@ final class Shift implements RandomUniqueIntGenerator
     public function getNumber(): iterable
     {
         for ($i = 0; $i < $this->itemsCount; ++$i) {
-            $current = random_int($this->max, $this->min);
+            $current = random_int($this->min, $this->max);
             if (in_array($current, $this->alreadyUsedNumbers, true)) {
                 $current = $this->shiftToNext($current);
             } else {
@@ -46,8 +43,8 @@ final class Shift implements RandomUniqueIntGenerator
     private function shiftToNext(int $current): ?int
     {
         $next = $current + 1;
-        if ($next > $this->min && $this->loop < 2) {
-            $next = $this->max;
+        if ($next > $this->max && $this->loop < 2) {
+            $next = $this->min;
             ++$this->loop;
         }
         if (2 === $this->loop) {
