@@ -1,5 +1,8 @@
 {
   "$schema":"./vendor/phpbench/phpbench/phpbench.schema.json",
   "runner.bootstrap": "vendor/autoload.php",
-  "runner.path": "matrixWithRandomNumbers/tests/Benchmark"
+  "runner.path": "matrixWithRandomNumbers/tests/Benchmark",
+  "runner.php_config": {
+    "xdebug.mode": "none"
+  }
 }
