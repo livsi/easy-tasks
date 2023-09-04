@@ -24,9 +24,11 @@ jobs:
       - name: "Install PHP"
         uses: "shivammathur/setup-php@v2"
         with:
-          coverage: "none"
+          coverage: none
           php-version: "${{ matrix.php-version }}"
           tools: composer:v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: "Validate composer.json"
         run: "composer validate --strict --no-check-lock"
 
@@ -49,6 +51,8 @@ jobs:
           coverage: "false"
           php-version: "${{ matrix.php-version }}"
           tools: composer:v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 #      - name: "Cache dependencies"
 #        uses: actions/cache@v3
 #        with:
@@ -79,6 +83,8 @@ jobs:
           coverage: "true"
           php-version: '8.2'
           tools: composer:v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 #      - name: "Cache dependencies"
 #        uses: actions/cache@v3
 #        with:
