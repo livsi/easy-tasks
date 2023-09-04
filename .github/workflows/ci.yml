@@ -11,61 +11,78 @@ permissions:
 
 jobs:
   composer-validate:
-           name: "Composer validate (${{ matrix.php-version }})"
-
-           runs-on: "ubuntu-latest"
-
-           strategy:
-             matrix:
-               php-version:
-                 - '8.2'
-
-           steps:
-             -
-               name: "Checkout code"
-               uses: "actions/checkout@v3"
-
-             -
-               name: "Install PHP"
-               uses: "shivammathur/setup-php@v2"
-               with:
-                 coverage: "none"
-                 php-version: "${{ matrix.php-version }}"
-                 tools: composer:v2
-             -
-               name: "Validate composer.json"
-               run: "composer validate --strict --no-check-lock"
-  ci:
-
-    runs-on: ubuntu-latest
+    name: "Composer validate (${{ matrix.php-version }})"
+    runs-on: "ubuntu-latest"
+    strategy:
+      matrix:
+        php-version:
+          - '8.2'
 
     steps:
-      -
-        name: "Checkout code"
+      - name: "Checkout code"
+        uses: "actions/checkout@v3"
+
+      - name: "Install PHP"
+        uses: "shivammathur/setup-php@v2"
+        with:
+          coverage: "none"
+          php-version: "${{ matrix.php-version }}"
+          tools: composer:v2
+      - name: "Validate composer.json"
+        run: "composer validate --strict --no-check-lock"
+
+  check_code_style:
+    name: "Check code style"
+    needs:
+      - "composer-validate"
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php-version:
+          - '8.2'
+
+    steps:
+      - name: "Checkout code"
         uses: actions/checkout@v3
-      -
-        name: "Setup PHP"
+
+      - name: "Setup PHP"
+        uses: shivammathur/setup-php@v2
+        with:
+          coverage: "true"
+          php-version: "${{ matrix.php-version }}"
+          tools: composer:v2
+      - name: "Install dependencies"
+        run: composer install --prefer-dist --no-progress
+      - name: "Check code-style"
+        run: vendor/bin/php-cs-fixer fix --dry-run
+  test:
+    runs-on: ubuntu-latest
+    needs:
+      - "composer-validate"
+    strategy:
+      matrix:
+        php-version:
+          - '8.2'
+    steps:
+      - name: "Checkout code"
+        uses: actions/checkout@v3
+
+      - name: "Setup PHP"
         uses: shivammathur/setup-php@v2
         with:
           coverage: "true"
           php-version: '8.2'
           tools: composer:v2
 
-      -
-        name: "Install dependencies"
+      - name: "Install dependencies"
         run: composer install --prefer-dist --no-progress
 
-      -
-        name: "Check code-style"
-        run: vendor/bin/php-cs-fixer fix --dry-run
-      -
-        name: "PHPUnit Tests"
+      - name: "PHPUnit Tests"
         uses: php-actions/phpunit@master
         env:
           TEST_NAME: all
         with:
           bootstrap: vendor/autoload.php
           configuration: ./phpunit.xml
-      -
-        name: "PhpBench Tests"
+      - name: "PhpBench Tests"
         run: vendor/bin/phpbench run  --report=aggregate
