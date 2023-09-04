@@ -53,13 +53,6 @@ jobs:
           tools: composer:v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#      - name: "Cache dependencies"
-#        uses: actions/cache@v3
-#        with:
-#          path: |
-#            ~/vendor
-#          key: "php-${{ matrix.php-version }}-composer-${{ hashFiles('composer.lock') }}"
-#          restore-keys: "php-${{ matrix.php-version }}-composer-"
       - name: "Install dependencies"
         run: composer install --prefer-dist --no-progress
       - name: "Check code-style"
@@ -85,12 +78,6 @@ jobs:
           tools: composer:v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#      - name: "Cache dependencies"
-#        uses: actions/cache@v3
-#        with:
-#          path: vendor
-#          key: "php-${{ matrix.php-version }}-composer-${{ hashFiles('composer.lock') }}"
-#          restore-keys: "php-${{ matrix.php-version }}-composer-"
       - name: "Install dependencies"
         run: composer install --prefer-dist --no-progress
       - name: "PHPUnit Tests"
@@ -111,15 +98,9 @@ jobs:
       - name: "Setup PHP"
         uses: shivammathur/setup-php@v2
         with:
-          coverage: "false"
+          coverage: none
           php-version: '8.2'
-          tools: composer:v2
-#      - name: "Cache dependencies"
-#        uses: actions/cache@v3
-#        with:
-#          path: vendor
-#          key: "php-${{ matrix.php-version }}-composer-${{ hashFiles('composer.lock') }}"
-#          restore-keys: "php-${{ matrix.php-version }}-composer-"
+          tools: composer:v2, opcache
       - name: "Install dependencies"
         run: composer install --prefer-dist --no-progress
       - name: "PhpBench Tests"
