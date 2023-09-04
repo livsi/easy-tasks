@@ -100,7 +100,7 @@ jobs:
         with:
           coverage: none
           php-version: '8.2'
-          tools: composer:v2, opcache
+          tools: composer:v2
       - name: "Install dependencies"
         run: composer install --prefer-dist --no-progress
       - name: "PhpBench Tests"
