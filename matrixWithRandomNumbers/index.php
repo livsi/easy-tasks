@@ -4,7 +4,8 @@
 declare(strict_types=1);
 
 use Matrix\OutputBuilder;
-use Matrix\RandomUniqueIntGenerator\LotoShuffle;
+use Matrix\RandomUniqueIntGenerator\GeneratorType;
+use Matrix\RandomUniqueIntGenerator\RandomUniqueIntGeneratorFactory;
 
 require __DIR__.'/../vendor/autoload.php';
 
@@ -19,15 +20,16 @@ if ('help' === $argv[1]) {
     exit(0);
 }
 
-$start = (int) $argv[1] ?: 1;
-$end = (int) $argv[2] ?: 1000;
-$columns = (int) $argv[3] ?: 5;
-$rows = (int) $argv[4] ?: 7;
-$innerWidth = (int) $argv[5] ?: 4;
+$generator = $argv[1] ?: 'LOTO';
+$min = (int) $argv[2] ?: 1;
+$max = (int) $argv[3] ?: 1000;
+$columns = (int) $argv[4] ?: 5;
+$rows = (int) $argv[5] ?: 7;
+$innerWidth = (int) $argv[6] ?: 4;
 
 try {
     echo (new OutputBuilder(
-        uniqueRand: new LotoShuffle($start, $end),
+        uniqueRand: ( new RandomUniqueIntGeneratorFactory())->create(GeneratorType::tryFromName(strtolower($generator)), $min, $max),
         columnsCount: $columns,
         rowsCount: $rows,
         innerWidth: $innerWidth)

@@ -15,19 +15,15 @@ final class Loto implements RandomUniqueIntGenerator
 
     /**
      * @throws RandomUniqueIntegerGeneratorLogicException
+     *
+     * @internal
      */
     public function __construct(
         readonly private int $min,
         readonly private int $max
     ) {
-        $this->itemsCount = $this->max - $this->min + 1;
-        if ($this->itemsCount < 1) {
-            throw new RandomUniqueIntegerGeneratorLogicException('max can be more than min, an ValueError will be thrown in range func.');
-        }
-        if ($this->itemsCount > self::MAX_ARRAY_ITEMS) {
-            throw new RandomUniqueIntegerGeneratorLogicException('max count of array items'.self::MAX_ARRAY_ITEMS.', an ValueError will be thrown in range func');
-        }
         $this->loto = range($this->min, $this->max);
+        $this->itemsCount = $this->max - $this->min + 1;
     }
 
     /**
