@@ -49,15 +49,13 @@ jobs:
           coverage: "true"
           php-version: "${{ matrix.php-version }}"
           tools: composer:v2
-      - name: "Key value"
-        run: echo "php-${{ matrix.php-version }}-composer-${{ hashFiles('composer.lock') }}"
-      - name: "Cache dependencies"
-        uses: actions/cache@v3
-        with:
-          path: |
-            ~/vendor
-          key: "php-${{ matrix.php-version }}-composer-${{ hashFiles('composer.lock') }}"
-          restore-keys: "php-${{ matrix.php-version }}-composer-"
+#      - name: "Cache dependencies"
+#        uses: actions/cache@v3
+#        with:
+#          path: |
+#            ~/vendor
+#          key: "php-${{ matrix.php-version }}-composer-${{ hashFiles('composer.lock') }}"
+#          restore-keys: "php-${{ matrix.php-version }}-composer-"
       - name: "Install dependencies"
         run: composer install --prefer-dist --no-progress
       - name: "Check code-style"
@@ -81,12 +79,12 @@ jobs:
           coverage: "true"
           php-version: '8.2'
           tools: composer:v2
-      - name: "Cache dependencies"
-        uses: actions/cache@v3
-        with:
-          path: vendor
-          key: "php-${{ matrix.php-version }}-composer-${{ hashFiles('composer.lock') }}"
-          restore-keys: "php-${{ matrix.php-version }}-composer-"
+#      - name: "Cache dependencies"
+#        uses: actions/cache@v3
+#        with:
+#          path: vendor
+#          key: "php-${{ matrix.php-version }}-composer-${{ hashFiles('composer.lock') }}"
+#          restore-keys: "php-${{ matrix.php-version }}-composer-"
       - name: "Install dependencies"
         run: composer install --prefer-dist --no-progress
       - name: "PHPUnit Tests"
@@ -110,12 +108,12 @@ jobs:
           coverage: "false"
           php-version: '8.2'
           tools: composer:v2
-      - name: "Cache dependencies"
-        uses: actions/cache@v3
-        with:
-          path: vendor
-          key: "php-${{ matrix.php-version }}-composer-${{ hashFiles('composer.lock') }}"
-          restore-keys: "php-${{ matrix.php-version }}-composer-"
+#      - name: "Cache dependencies"
+#        uses: actions/cache@v3
+#        with:
+#          path: vendor
+#          key: "php-${{ matrix.php-version }}-composer-${{ hashFiles('composer.lock') }}"
+#          restore-keys: "php-${{ matrix.php-version }}-composer-"
       - name: "Install dependencies"
         run: composer install --prefer-dist --no-progress
       - name: "PhpBench Tests"
