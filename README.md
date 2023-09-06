@@ -18,7 +18,7 @@
 
 ### Предустановки
 - для локальной разработки нужен docker
-- для запуска тасок - установленный [Taskfile](https://taskfile.dev/installation/)
+- для локального запуска тасок - установленный [Taskfile](https://taskfile.dev/installation/)
 
 
  
