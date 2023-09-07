@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Matrix\RandomUniqueIntGenerator;
 
+use Matrix\Random\Randomizer;
 use Matrix\RandomUniqueIntegerGeneratorLogicException;
 use Matrix\RandomUniqueIntGenerator;
 
@@ -14,7 +15,7 @@ class RandomUniqueIntGeneratorFactory
     /**
      * @throws RandomUniqueIntegerGeneratorLogicException
      */
-    public function create(GeneratorType $type, int $min, int $max): RandomUniqueIntGenerator
+    public function create(GeneratorType $type, Randomizer $randomizer, int $min, int $max): RandomUniqueIntGenerator
     {
         $itemsCount = $max - $min + 1;
         if ($itemsCount < 1) {
@@ -25,6 +26,6 @@ class RandomUniqueIntGeneratorFactory
         }
         $class = $type->value;
 
-        return new $class($min, $max);
+        return new $class($randomizer, $min, $max);
     }
 }
