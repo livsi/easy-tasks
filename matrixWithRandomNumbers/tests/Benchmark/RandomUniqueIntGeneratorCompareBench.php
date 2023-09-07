@@ -26,7 +26,7 @@ class RandomUniqueIntGeneratorCompareBench
     #[Bench\RetryThreshold(20.0)]
     public function benchLotoShuffle(): void
     {
-        $this->run(GeneratorType::LOTO_SHUFFLE);
+        $this->run(GeneratorType::SHUFFLE);
     }
 
     #[Bench\Revs(self::REV)]
@@ -39,6 +39,6 @@ class RandomUniqueIntGeneratorCompareBench
 
     private function run(GeneratorType $type): void
     {
-        (new RandomUniqueIntGeneratorFactory())->create(GeneratorType::LOTO, 1, 10000)->getNumber();
+        (new RandomUniqueIntGeneratorFactory())->create($type, 1, 10000)->getNumber();
     }
 }
