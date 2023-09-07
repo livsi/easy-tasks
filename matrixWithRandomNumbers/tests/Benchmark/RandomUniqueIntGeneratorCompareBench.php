@@ -10,12 +10,11 @@ use PhpBench\Attributes as Bench;
 
 class RandomUniqueIntGeneratorCompareBench
 {
-    private const REV = 999;
-    private const ITER = 100;
+    private const REV = 100;
+    private const ITER = 10;
 
     #[Bench\Revs(self::REV)]
     #[Bench\Iterations(self::ITER)]
-    #[Bench\RetryThreshold(20.0)]
     public function benchLoto(): void
     {
         $this->run(GeneratorType::LOTO);
@@ -23,7 +22,6 @@ class RandomUniqueIntGeneratorCompareBench
 
     #[Bench\Revs(self::REV)]
     #[Bench\Iterations(self::ITER)]
-    #[Bench\RetryThreshold(20.0)]
     public function benchLotoShuffle(): void
     {
         $this->run(GeneratorType::SHUFFLE);
@@ -31,7 +29,6 @@ class RandomUniqueIntGeneratorCompareBench
 
     #[Bench\Revs(self::REV)]
     #[Bench\Iterations(self::ITER)]
-    #[Bench\RetryThreshold(20.0)]
     public function benchShift(): void
     {
         $this->run(GeneratorType::SHIFT);
