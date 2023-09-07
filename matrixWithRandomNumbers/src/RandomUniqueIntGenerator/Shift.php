@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Matrix\RandomUniqueIntGenerator;
 
+use Matrix\Random\Randomizer;
 use Matrix\RandomUniqueIntegerGeneratorLogicException;
 use Matrix\RandomUniqueIntGenerator;
 
@@ -18,7 +19,10 @@ final class Shift implements RandomUniqueIntGenerator
     /**
      * @internal
      */
-    public function __construct(readonly private int $min, readonly private int $max)
+    public function __construct(
+        readonly private Randomizer $randomizer,
+        readonly private int $min,
+        readonly private int $max)
     {
         $this->itemsCount = $this->max - $this->min + 1;
     }
@@ -30,7 +34,7 @@ final class Shift implements RandomUniqueIntGenerator
     public function getNumber(): iterable
     {
         for ($i = 0; $i < $this->itemsCount; ++$i) {
-            $current = random_int($this->min, $this->max);
+            $current = $this->randomizer->getInt($this->min, $this->max);
             if (in_array($current, $this->alreadyUsedNumbers, true)) {
                 $current = $this->shiftToNext($current);
             } else {

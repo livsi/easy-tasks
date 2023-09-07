@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Matrix\RandomUniqueIntGenerator;
 
+use Matrix\Random\Randomizer;
 use Matrix\RandomUniqueIntGenerator;
-use Random\Randomizer;
 
 final class Shuffle implements RandomUniqueIntGenerator
 {
@@ -16,12 +16,13 @@ final class Shuffle implements RandomUniqueIntGenerator
      * @internal
      */
     public function __construct(
+        readonly private Randomizer $randomizer,
         readonly private int $min,
-        readonly private int $max
+        readonly private int $max,
     ) {
         $this->itemsCount = $this->max - $this->min + 1;
 
-        $this->loto = (new Randomizer())->shuffleArray(range($this->min, $this->max));
+        $this->loto = $this->randomizer->shuffleArray(range($this->min, $this->max));
     }
 
     /**

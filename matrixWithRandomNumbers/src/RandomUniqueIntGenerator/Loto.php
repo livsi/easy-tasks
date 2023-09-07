@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Matrix\RandomUniqueIntGenerator;
 
+use Matrix\Random\Randomizer;
 use Matrix\RandomUniqueIntegerGeneratorLogicException;
 use Matrix\RandomUniqueIntGenerator;
 
 final class Loto implements RandomUniqueIntGenerator
 {
-    private const MAX_ARRAY_ITEMS = 1073741822;
     private array $loto;
     private int $itemsCount;
 
@@ -19,6 +19,7 @@ final class Loto implements RandomUniqueIntGenerator
      * @internal
      */
     public function __construct(
+        readonly private Randomizer $randomizer,
         readonly private int $min,
         readonly private int $max
     ) {
@@ -32,7 +33,7 @@ final class Loto implements RandomUniqueIntGenerator
     public function getNumber(): iterable
     {
         for ($i = 0; $i < $this->itemsCount; ++$i) {
-            $current = random_int(0, count($this->loto) - 1);
+            $current = $this->randomizer->getInt(0, count($this->loto) - 1);
 
             $number = $this->loto[$current];
             unset($this->loto[$current]);

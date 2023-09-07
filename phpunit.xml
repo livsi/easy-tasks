@@ -25,6 +25,9 @@
             <directory>numbersLadder/src</directory>
             <directory>matrixWithRandomNumbers/src</directory>
         </include>
+        <exclude>
+            <directory>matrixWithRandomNumbers/src/Random</directory>
+        </exclude>
     </source>
     <coverage pathCoverage="true"
               ignoreDeprecatedCodeUnits="true"
