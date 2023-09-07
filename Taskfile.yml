@@ -18,3 +18,7 @@ tasks:
     cmds:
       - docker run --rm --tty --user 1000:1000 --volume $PWD:/app -w /app php:8.2.8-cli-alpine3.18 php vendor/bin/phpunit --testdox  -c ./phpunit.xml {{.CLI_ARGS}}
     silent: true
+  test-coverage:
+    cmds:
+      - docker run --rm --tty --user 1000:1000 --volume $PWD:/app -w /app alcohol/php:8.2-xdebug php vendor/bin/phpunit -c ./phpunit.xml --coverage-html  ./build/ {{.CLI_ARGS}}
+    silent: true
