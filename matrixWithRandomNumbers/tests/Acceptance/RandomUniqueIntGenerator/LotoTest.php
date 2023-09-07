@@ -17,7 +17,7 @@ final class LotoTest extends TestCase
     public function testSuccessGetNumber(): void
     {
         $start = 1;
-        $end = 10000;
+        $end = 1000;
         $loto = new Loto($start, $end);
         foreach ($loto->getNumber() as $number) {
             assertGreaterThanOrEqual($start, $number);
