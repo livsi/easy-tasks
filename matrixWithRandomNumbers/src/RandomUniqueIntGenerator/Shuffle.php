@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace Matrix\RandomUniqueIntGenerator;
 
 use Matrix\RandomUniqueIntGenerator;
+use Random\Randomizer;
 
-final class LotoShuffle implements RandomUniqueIntGenerator
+final class Shuffle implements RandomUniqueIntGenerator
 {
-    private const MAX_ARRAY_ITEMS = 1073741822;
     private array $loto;
     private int $itemsCount;
 
@@ -20,8 +20,8 @@ final class LotoShuffle implements RandomUniqueIntGenerator
         readonly private int $max
     ) {
         $this->itemsCount = $this->max - $this->min + 1;
-        $this->loto = range($this->min, $this->max);
-        shuffle($this->loto);
+
+        $this->loto = (new Randomizer())->shuffleArray(range($this->min, $this->max));
     }
 
     /**
